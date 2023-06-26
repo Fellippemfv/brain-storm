@@ -1,7 +1,114 @@
-/* // ---//---//--- Main ---//---//---// */
-.mainContainer {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
+/* page.module.css */
 
+.mainContainer {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.createButtonContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+.createButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.draggableDiv {
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    transition: box-shadow 0.3s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    cursor: grab;
+}
+
+.draggableDiv:hover {
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+.draggableDiv:active {
+    cursor: grabbing;
+}
+
+.textareaContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.textareaContainer input {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    cursor: grab;
+}
+
+.textareaContainer input:focus {
+    outline: none;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: grabbing;
+}
+
+/* Estilo adicional para o efeito de arrastar */
+.react-draggable-dragging {
+    cursor: grabbing !important;
+}
+
+.draggableDiv:hover .circleTop,
+.draggableDiv:hover .circleBottom,
+.draggableDiv:hover .circleLeft,
+.draggableDiv:hover .circleRight {
+    display: block;
+}
+
+.circleTop,
+.circleBottom,
+.circleLeft,
+.circleRight {
+    position: absolute;
+    display: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+.circleTop {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.circleBottom {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.circleLeft {
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+}
+
+.circleRight {
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
 }
