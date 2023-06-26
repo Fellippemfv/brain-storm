@@ -1,16 +1,23 @@
 "use client"
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import styles from './page.module.css';
 
+interface Div {
+    position: {
+        x: number;
+        y: number;
+    };
+    mainText: string;
+    description: string;
+}
+
 export default function Home() {
-    const [divs, setDivs] = useState([]);
+    const [divs, setDivs] = useState<Div[]>([]);
     const [mainText, setMainText] = useState('');
     const [description, setDescription] = useState('');
-    const [selectedCircle, setSelectedCircle] = useState(null);
-    const [lines, setLines] = useState([]);
 
-    const handleDrag = (e, ui, index) => {
+    const handleDrag = (e: any, ui: any, index: number) => {
         const { x, y } = divs[index].position;
         const newDivs = [...divs];
         newDivs[index] = {
@@ -20,7 +27,7 @@ export default function Home() {
         setDivs(newDivs);
     };
 
-    const handleMainTextChange = (e, index) => {
+    const handleMainTextChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const newDivs = [...divs];
         newDivs[index] = {
             ...newDivs[index],
@@ -29,7 +36,7 @@ export default function Home() {
         setDivs(newDivs);
     };
 
-    const handleDescriptionChange = (e, index) => {
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const newDivs = [...divs];
         newDivs[index] = {
             ...newDivs[index],
@@ -47,20 +54,6 @@ export default function Home() {
             description: '',
         });
         setDivs(newDivs);
-    };
-
-    const handleCircleClick = (e, divIndex, circleIndex) => {
-        if (selectedCircle === null) {
-            setSelectedCircle({ divIndex, circleIndex });
-        } else {
-            const { divIndex: selectedDivIndex, circleIndex: selectedCircleIndex } = selectedCircle;
-            if (divIndex !== selectedDivIndex) {
-                const newLines = [...lines];
-                newLines.push({ start: selectedCircle, end: { divIndex, circleIndex } });
-                setLines(newLines);
-            }
-            setSelectedCircle(null);
-        }
     };
 
     return (
@@ -94,22 +87,12 @@ export default function Home() {
                                 placeholder="Descrição"
                             />
                         </div>
-                        <div className={styles.circleTop} onClick={(e) => handleCircleClick(e, divIndex, 0)} />
-                        <div className={styles.circleBottom} onClick={(e) => handleCircleClick(e, divIndex, 1)} />
-                        <div className={styles.circleLeft} onClick={(e) => handleCircleClick(e, divIndex, 2)} />
-                        <div className={styles.circleRight} onClick={(e) => handleCircleClick(e, divIndex, 3)} />
+                        <div className={styles.circleTop} />
+                        <div className={styles.circleBottom} />
+                        <div className={styles.circleLeft} />
+                        <div className={styles.circleRight} />
                     </div>
                 </Draggable>
-            ))}
-            {lines.map((line, index) => (
-                <svg key={index} className={styles.line}>
-                    <line
-                        x1={divs[line.start.divIndex].position.x}
-                        y1={divs[line.start.divIndex].position.y}
-                        x2={divs[line.end.divIndex].position.x}
-                        y2={divs[line.end.divIndex].position.y}
-                    />
-                </svg>
             ))}
         </main>
     );
