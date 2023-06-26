@@ -1,0 +1,30 @@
+:root {
+    font-size: 62.5%;
+    font-family: "Roboto";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+input,
+select,
+button {
+    font-family: "Roboto";
+    all: unset;
+}
+
+@media (max-width: 1024px) {
+    :root {
+        font-size: 50%;
+    }
+
+}
